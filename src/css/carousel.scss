@@ -1,0 +1,68 @@
+/*Carousel style*/
+#carousel {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    .img-ct {
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+    }
+    .C-section {
+      float: left;
+    }
+    img {
+      width: 100vw;
+      height: 100vh;
+    }
+    .carousel-control {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 15%;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0 , 0);
+      cursor: pointer;
+      opacity: 0.3;
+      &:hover {
+        opacity: 0.9;
+      }
+      .icon {
+        font-size: 50px;
+        width: 1em; height: 1em;
+        vertical-align: -6.85em;
+        fill: #fff;
+        overflow: hidden;
+      }
+    }
+    .btn-pre {
+      left: 0px;
+      background-image: linear-gradient(to left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+    }
+    .btn-next {
+      right: 0px;
+      background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+    }
+    .bullet {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .C-index {
+      width: 30px;
+      height: 6px;
+      float: left;
+      background-color: #fff;
+      border-radius: 3px;
+      margin: 0 5px;
+      cursor: pointer;
+      &.active {
+        background-color: #666;
+      }
+    }
+  }
+  
