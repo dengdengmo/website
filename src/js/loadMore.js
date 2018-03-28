@@ -1,4 +1,3 @@
-
 function LoadMore($node) {
   this.node = $node
   this.box = $node.find('.box')
@@ -128,5 +127,6 @@ LoadMore.prototype = {
     })
   }
 }
+
 
 module.exports = LoadMore
