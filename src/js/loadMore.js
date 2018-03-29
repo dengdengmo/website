@@ -1,3 +1,12 @@
+// function addScriptTag(src) {
+//   const script = document.createElement('script')
+//   script.setAttribute('type', 'text/javascript')
+//   script.src = src
+//   document.body.appendChild(script)
+// }
+// window.onload = function() {
+//   addScriptTag('http://platform.sina.com.cn/slide/album_tech')
+// }
 function LoadMore($node) {
   this.node = $node
   this.box = $node.find('.box')
@@ -39,6 +48,18 @@ LoadMore.prototype = {
       this.arr.push(0)
     }
   },
+  createCORSRequest(method, url) {
+    let xhr = new XMLHttpRequest()
+    if ('withCredentials' in xhr) {
+      xhr.open(method, url, true)
+    } else if (typeof XDomainRequest != 'undefined') {
+      xhr = new XDomainRequest()
+      xhr.open(method, url)
+    } else {
+      xhr = null
+    }
+    return xhr
+  },
   loadData() {
     const _this = this
     if (this.btn.data('loading')) return
@@ -52,15 +73,28 @@ LoadMore.prototype = {
         app_key: '1271687855',
         page: _this.page,
         num: _this.len
+      },
+      success: response => {
+        if (response && response.status.code === '0') {
+          _this.placeNode(response)
+        } else {
+          alert('请求数据失败，请稍后重试')
+        }
+        _this.btn.data('loading', false)
       }
-    }).done(response => {
-      if (response && response.status.code === '0') {
-        _this.placeNode(response)
-      } else {
-        alert('请求数据失败，请稍后重试')
-      }
-      _this.btn.data('loading', false)
     })
+    // let request = _this.createCORSRequest('get', 'https://platform.sina.com.cn/slide/album_tech?app_key=1271687855&page=1&num=8')
+    // console.log(request)
+    
+    // if (request) {
+    //   request.onload = function() {
+    //     _this.placeNode(request.responseText)
+    //   }
+    //   request.onerror = () => {
+    //     alert('chucuole')
+    //   }
+    //   request.send(null)
+    // }
   },
   placeNode(ret) {
     const _this = this
@@ -127,6 +161,18 @@ LoadMore.prototype = {
     })
   }
 }
+// function createCORSRequest(method, url) {
+//   let xhr = new XMLHttpRequest()
+//   if ('withCredentials' in xhr) {
+//     xhr.open(method, url, true)
+//   } else if (typeof XDomainRequest != 'undefined') {
+//     xhr = new XDomainRequest()
+//     xhr.open(method, url)
+//   } else {
+//     xhr = null
+//   }
+//   return
+// }
 
 
 module.exports = LoadMore
